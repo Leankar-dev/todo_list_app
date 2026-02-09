@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:todo_list_app/core/constants/app_colors.dart';
 import 'package:todo_list_app/core/constants/app_strings.dart';
 import 'package:todo_list_app/core/utils/validators.dart';
+import 'package:todo_list_app/presentation/pages/auth/register/controller/register_controller.dart';
 import 'package:todo_list_app/presentation/widgets/buttons/custom_elevated_button.dart';
 import 'package:todo_list_app/presentation/widgets/buttons/custom_text_button.dart';
 import 'package:todo_list_app/presentation/widgets/inputs/custom_text_form_field.dart';
@@ -21,25 +22,16 @@ class RegisterForm extends StatefulWidget {
 }
 
 class _RegisterFormState extends State<RegisterForm> {
-  final _formKey = GlobalKey<FormState>();
-  final _nameController = TextEditingController();
-  final _emailController = TextEditingController();
-  final _passwordController = TextEditingController();
-  final _confirmPasswordController = TextEditingController();
-  bool _obscurePassword = true;
-  bool _obscureConfirmPassword = true;
+  final _controller = RegisterController();
 
   @override
   void dispose() {
-    _nameController.dispose();
-    _emailController.dispose();
-    _passwordController.dispose();
-    _confirmPasswordController.dispose();
+    _controller.dispose();
     super.dispose();
   }
 
   void _submit() {
-    if (_formKey.currentState!.validate()) {
+    if (_controller.formKey.currentState!.validate()) {
       widget.onRegister();
     }
   }
@@ -60,7 +52,7 @@ class _RegisterFormState extends State<RegisterForm> {
         ],
       ),
       child: Form(
-        key: _formKey,
+        key: _controller.formKey,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -80,7 +72,7 @@ class _RegisterFormState extends State<RegisterForm> {
             ),
             const SizedBox(height: 32),
             CustomTextFormField(
-              controller: _nameController,
+              controller: _controller.nameController,
               labelText: AppStrings.name,
               hintText: AppStrings.enterName,
               keyboardType: TextInputType.name,
@@ -90,7 +82,7 @@ class _RegisterFormState extends State<RegisterForm> {
             ),
             const SizedBox(height: 16),
             CustomTextFormField(
-              controller: _emailController,
+              controller: _controller.emailController,
               labelText: AppStrings.email,
               hintText: AppStrings.enterEmail,
               keyboardType: TextInputType.emailAddress,
@@ -100,21 +92,21 @@ class _RegisterFormState extends State<RegisterForm> {
             ),
             const SizedBox(height: 16),
             CustomTextFormField(
-              controller: _passwordController,
+              controller: _controller.passwordController,
               labelText: AppStrings.password,
               hintText: AppStrings.enterPassword,
-              obscureText: _obscurePassword,
+              obscureText: _controller.obscurePassword,
               prefixIcon: const Icon(Icons.lock_outline),
               textInputAction: TextInputAction.next,
               suffixIcon: IconButton(
                 icon: Icon(
-                  _obscurePassword
+                  _controller.obscurePassword
                       ? Icons.visibility_off
                       : Icons.visibility,
                 ),
                 onPressed: () {
                   setState(() {
-                    _obscurePassword = !_obscurePassword;
+                    _controller.toggleObscurePassword();
                   });
                 },
               ),
@@ -122,27 +114,27 @@ class _RegisterFormState extends State<RegisterForm> {
             ),
             const SizedBox(height: 16),
             CustomTextFormField(
-              controller: _confirmPasswordController,
+              controller: _controller.confirmPasswordController,
               labelText: AppStrings.confirmPassword,
               hintText: AppStrings.enterPassword,
-              obscureText: _obscureConfirmPassword,
+              obscureText: _controller.obscureConfirmPassword,
               prefixIcon: const Icon(Icons.lock_outline),
               textInputAction: TextInputAction.done,
               suffixIcon: IconButton(
                 icon: Icon(
-                  _obscureConfirmPassword
+                  _controller.obscureConfirmPassword
                       ? Icons.visibility_off
                       : Icons.visibility,
                 ),
                 onPressed: () {
                   setState(() {
-                    _obscureConfirmPassword = !_obscureConfirmPassword;
+                    _controller.toggleObscureConfirmPassword();
                   });
                 },
               ),
               validator: (value) => Validators.confirmPassword(
                 value,
-                _passwordController.text,
+                _controller.passwordController.text,
               ),
             ),
             const SizedBox(height: 24),

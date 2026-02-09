@@ -3,6 +3,7 @@ import 'package:todo_list_app/core/constants/app_colors.dart';
 import 'package:todo_list_app/core/constants/app_dimensions.dart';
 import 'package:todo_list_app/core/constants/app_strings.dart';
 import 'package:todo_list_app/core/utils/validators.dart';
+import 'package:todo_list_app/presentation/pages/auth/login/controller/login_controller.dart';
 import 'package:todo_list_app/presentation/widgets/buttons/custom_elevated_button.dart';
 import 'package:todo_list_app/presentation/widgets/buttons/custom_text_button.dart';
 import 'package:todo_list_app/presentation/widgets/inputs/custom_text_form_field.dart';
@@ -22,20 +23,16 @@ class LoginForm extends StatefulWidget {
 }
 
 class _LoginFormState extends State<LoginForm> {
-  final _formKey = GlobalKey<FormState>();
-  final _emailController = TextEditingController();
-  final _passwordController = TextEditingController();
-  bool _obscurePassword = true;
+  final _controller = LoginController();
 
   @override
   void dispose() {
-    _emailController.dispose();
-    _passwordController.dispose();
+    _controller.dispose();
     super.dispose();
   }
 
   void _submit() {
-    if (_formKey.currentState!.validate()) {
+    if (_controller.formKey.currentState!.validate()) {
       widget.onLogin();
     }
   }
@@ -56,7 +53,7 @@ class _LoginFormState extends State<LoginForm> {
         ],
       ),
       child: Form(
-        key: _formKey,
+        key: _controller.formKey,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -84,7 +81,7 @@ class _LoginFormState extends State<LoginForm> {
             ),
             const SizedBox(height: 32),
             CustomTextFormField(
-              controller: _emailController,
+              controller: _controller.emailController,
               labelText: AppStrings.email,
               hintText: AppStrings.enterEmail,
               keyboardType: TextInputType.emailAddress,
@@ -94,21 +91,21 @@ class _LoginFormState extends State<LoginForm> {
             ),
             const SizedBox(height: 16),
             CustomTextFormField(
-              controller: _passwordController,
+              controller: _controller.passwordController,
               labelText: AppStrings.password,
               hintText: AppStrings.enterPassword,
-              obscureText: _obscurePassword,
+              obscureText: _controller.obscurePassword,
               prefixIcon: const Icon(Icons.lock_outline),
               textInputAction: TextInputAction.done,
               suffixIcon: IconButton(
                 icon: Icon(
-                  _obscurePassword
+                  _controller.obscurePassword
                       ? Icons.visibility_off
                       : Icons.visibility,
                 ),
                 onPressed: () {
                   setState(() {
-                    _obscurePassword = !_obscurePassword;
+                    _controller.toggleObscurePassword();
                   });
                 },
               ),
