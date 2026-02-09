@@ -1,0 +1,48 @@
+name: todo_list_app
+description: "App de lista de tarefas com Drift e Riverpod."
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.10.4
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # Icons
+  cupertino_icons: ^1.0.8
+
+  # Drift - Persistencia de dados (SQLite)
+  drift: ^2.22.1
+  sqlite3_flutter_libs: ^0.5.28
+  path_provider: ^2.1.5
+  path: ^1.9.1
+
+  # Riverpod - Gerenciamento de estado
+  flutter_riverpod: ^3.1.0
+  riverpod_annotation: ^4.0.0
+
+  # Utilitarios
+  uuid: ^4.5.1
+  intl: ^0.20.1
+  equatable: ^2.0.7
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^6.0.0
+
+  # Geradores de codigo
+  build_runner: ^2.4.13
+  drift_dev: ^2.22.1
+  riverpod_generator: ">=4.0.0 <4.0.1"
+  riverpod_lint: ">=3.1.0 <3.1.1"
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/images/
