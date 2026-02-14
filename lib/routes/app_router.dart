@@ -6,23 +6,13 @@ import 'package:todo_list_app/routes/app_routes.dart';
 
 class AppRouter {
   static Route<dynamic> generateRoute(RouteSettings settings) {
-    switch (settings.name) {
-      case AppRoutes.login:
-        return MaterialPageRoute(
-          builder: (_) => const LoginPage(),
-        );
-      case AppRoutes.register:
-        return MaterialPageRoute(
-          builder: (_) => const RegisterPage(),
-        );
-      case AppRoutes.home:
-        return MaterialPageRoute(
-          builder: (_) => const HomePage(),
-        );
-      default:
-        return MaterialPageRoute(
-          builder: (_) => const LoginPage(),
-        );
-    }
+    final page = switch (settings.name) {
+      AppRoutes.login => const LoginPage(),
+      AppRoutes.register => const RegisterPage(),
+      AppRoutes.home => const HomePage(),
+      _ => const LoginPage(),
+    };
+
+    return MaterialPageRoute(builder: (_) => page);
   }
 }

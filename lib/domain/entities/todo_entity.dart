@@ -49,27 +49,35 @@ class TodoEntity extends Equatable {
   }
 
   bool get isOverdue {
-    if (dueDate == null || isCompleted) return false;
-    final now = DateTime.now();
-    final today = DateTime(now.year, now.month, now.day);
-    final dueDateOnly = DateTime(dueDate!.year, dueDate!.month, dueDate!.day);
-    return dueDateOnly.isBefore(today);
+    if (isCompleted) return false;
+    if (dueDate case final due?) {
+      final now = DateTime.now();
+      final today = DateTime(now.year, now.month, now.day);
+      final dueDateOnly = DateTime(due.year, due.month, due.day);
+      return dueDateOnly.isBefore(today);
+    }
+    return false;
   }
 
   bool get isDueToday {
-    if (dueDate == null) return false;
-    final now = DateTime.now();
-    return dueDate!.year == now.year &&
-        dueDate!.month == now.month &&
-        dueDate!.day == now.day;
+    if (dueDate case final due?) {
+      final now = DateTime.now();
+      return due.year == now.year &&
+          due.month == now.month &&
+          due.day == now.day;
+    }
+    return false;
   }
 
   bool get isUpcoming {
-    if (dueDate == null || isCompleted) return false;
-    final now = DateTime.now();
-    final today = DateTime(now.year, now.month, now.day);
-    final dueDateOnly = DateTime(dueDate!.year, dueDate!.month, dueDate!.day);
-    return dueDateOnly.isAfter(today);
+    if (isCompleted) return false;
+    if (dueDate case final due?) {
+      final now = DateTime.now();
+      final today = DateTime(now.year, now.month, now.day);
+      final dueDateOnly = DateTime(due.year, due.month, due.day);
+      return dueDateOnly.isAfter(today);
+    }
+    return false;
   }
 
   @override

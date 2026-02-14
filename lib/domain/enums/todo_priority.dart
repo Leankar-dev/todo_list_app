@@ -11,49 +11,32 @@ enum TodoPriority {
   final int value;
   const TodoPriority(this.value);
 
-  String get label {
-    switch (this) {
-      case TodoPriority.low:
-        return AppStrings.priorityLow;
-      case TodoPriority.medium:
-        return AppStrings.priorityMedium;
-      case TodoPriority.high:
-        return AppStrings.priorityHigh;
-      case TodoPriority.urgent:
-        return AppStrings.priorityUrgent;
-    }
-  }
+  String get label => switch (this) {
+        TodoPriority.low => AppStrings.priorityLow,
+        TodoPriority.medium => AppStrings.priorityMedium,
+        TodoPriority.high => AppStrings.priorityHigh,
+        TodoPriority.urgent => AppStrings.priorityUrgent,
+      };
 
-  Color get color {
-    switch (this) {
-      case TodoPriority.low:
-        return AppColors.priorityLow;
-      case TodoPriority.medium:
-        return AppColors.priorityMedium;
-      case TodoPriority.high:
-        return AppColors.priorityHigh;
-      case TodoPriority.urgent:
-        return AppColors.priorityUrgent;
-    }
-  }
+  Color get color => switch (this) {
+        TodoPriority.low => AppColors.priorityLow,
+        TodoPriority.medium => AppColors.priorityMedium,
+        TodoPriority.high => AppColors.priorityHigh,
+        TodoPriority.urgent => AppColors.priorityUrgent,
+      };
 
-  IconData get icon {
-    switch (this) {
-      case TodoPriority.low:
-        return Icons.arrow_downward;
-      case TodoPriority.medium:
-        return Icons.remove;
-      case TodoPriority.high:
-        return Icons.arrow_upward;
-      case TodoPriority.urgent:
-        return Icons.priority_high;
-    }
-  }
+  IconData get icon => switch (this) {
+        TodoPriority.low => Icons.arrow_downward,
+        TodoPriority.medium => Icons.remove,
+        TodoPriority.high => Icons.arrow_upward,
+        TodoPriority.urgent => Icons.priority_high,
+      };
 
-  static TodoPriority fromValue(int value) {
-    return TodoPriority.values.firstWhere(
-      (e) => e.value == value,
-      orElse: () => TodoPriority.low,
-    );
-  }
+  static TodoPriority fromValue(int value) => switch (value) {
+        0 => TodoPriority.low,
+        1 => TodoPriority.medium,
+        2 => TodoPriority.high,
+        3 => TodoPriority.urgent,
+        _ => TodoPriority.low,
+      };
 }

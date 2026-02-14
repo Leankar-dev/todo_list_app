@@ -27,13 +27,12 @@ class UserEntity extends Equatable {
     );
   }
 
-  String get initials {
-    final parts = name.trim().split(' ');
-    if (parts.length >= 2) {
-      return '${parts.first[0]}${parts.last[0]}'.toUpperCase();
-    }
-    return name.isNotEmpty ? name[0].toUpperCase() : '?';
-  }
+  String get initials => switch (name.trim().split(' ')) {
+        [final first, ..., final last] =>
+          '${first[0]}${last[0]}'.toUpperCase(),
+        [final single] when single.isNotEmpty => single[0].toUpperCase(),
+        _ => '?',
+      };
 
   @override
   List<Object?> get props => [id, name, email, createdAt];

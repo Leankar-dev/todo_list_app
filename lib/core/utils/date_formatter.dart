@@ -38,19 +38,14 @@ abstract class DateFormatter {
     final dateOnly = DateTime(date.year, date.month, date.day);
     final difference = dateOnly.difference(today).inDays;
 
-    if (difference == 0) {
-      return 'Hoje';
-    } else if (difference == 1) {
-      return 'Amanha';
-    } else if (difference == -1) {
-      return 'Ontem';
-    } else if (difference > 1 && difference <= 7) {
-      return 'Em $difference dias';
-    } else if (difference < -1 && difference >= -7) {
-      return 'Ha ${-difference} dias';
-    } else {
-      return formatDate(date);
-    }
+    return switch (difference) {
+      0 => 'Hoje',
+      1 => 'Amanha',
+      -1 => 'Ontem',
+      > 1 && <= 7 => 'Em $difference dias',
+      >= -7 && < -1 => 'Ha ${-difference} dias',
+      _ => formatDate(date),
+    };
   }
 
   static bool isToday(DateTime date) {
@@ -74,8 +69,8 @@ abstract class DateFormatter {
     return dateOnly.isBefore(today);
   }
 
-  static bool isOverdue(DateTime? dueDate) {
-    if (dueDate == null) return false;
-    return isPast(dueDate);
-  }
+  static bool isOverdue(DateTime? dueDate) => switch (dueDate) {
+        final date? => isPast(date),
+        null => false,
+      };
 }

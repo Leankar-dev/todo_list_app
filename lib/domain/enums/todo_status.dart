@@ -9,43 +9,28 @@ enum TodoStatus {
   final int value;
   const TodoStatus(this.value);
 
-  String get label {
-    switch (this) {
-      case TodoStatus.pending:
-        return 'Pendente';
-      case TodoStatus.inProgress:
-        return 'Em Progresso';
-      case TodoStatus.completed:
-        return 'Concluida';
-    }
-  }
+  String get label => switch (this) {
+        TodoStatus.pending => 'Pendente',
+        TodoStatus.inProgress => 'Em Progresso',
+        TodoStatus.completed => 'Concluida',
+      };
 
-  Color get color {
-    switch (this) {
-      case TodoStatus.pending:
-        return AppColors.warning;
-      case TodoStatus.inProgress:
-        return AppColors.info;
-      case TodoStatus.completed:
-        return AppColors.success;
-    }
-  }
+  Color get color => switch (this) {
+        TodoStatus.pending => AppColors.warning,
+        TodoStatus.inProgress => AppColors.info,
+        TodoStatus.completed => AppColors.success,
+      };
 
-  IconData get icon {
-    switch (this) {
-      case TodoStatus.pending:
-        return Icons.pending_outlined;
-      case TodoStatus.inProgress:
-        return Icons.timelapse;
-      case TodoStatus.completed:
-        return Icons.check_circle_outline;
-    }
-  }
+  IconData get icon => switch (this) {
+        TodoStatus.pending => Icons.pending_outlined,
+        TodoStatus.inProgress => Icons.timelapse,
+        TodoStatus.completed => Icons.check_circle_outline,
+      };
 
-  static TodoStatus fromValue(int value) {
-    return TodoStatus.values.firstWhere(
-      (e) => e.value == value,
-      orElse: () => TodoStatus.pending,
-    );
-  }
+  static TodoStatus fromValue(int value) => switch (value) {
+        0 => TodoStatus.pending,
+        1 => TodoStatus.inProgress,
+        2 => TodoStatus.completed,
+        _ => TodoStatus.pending,
+      };
 }
