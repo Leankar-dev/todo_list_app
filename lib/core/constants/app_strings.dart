@@ -44,6 +44,10 @@ abstract class AppStrings {
   static const String priorityHigh = 'Alta';
   static const String priorityUrgent = 'Urgente';
 
+  static const String statusPending = 'Pendente';
+  static const String statusInProgress = 'Em Progresso';
+  static const String statusCompleted = 'Concluida';
+
   static const String all = 'Todas';
   static const String today = 'Hoje';
   static const String upcoming = 'Proximas';

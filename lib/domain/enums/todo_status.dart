@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todo_list_app/core/constants/app_colors.dart';
+import 'package:todo_list_app/core/constants/app_strings.dart';
 
 enum TodoStatus {
   pending(0),
@@ -10,9 +11,9 @@ enum TodoStatus {
   const TodoStatus(this.value);
 
   String get label => switch (this) {
-        TodoStatus.pending => 'Pendente',
-        TodoStatus.inProgress => 'Em Progresso',
-        TodoStatus.completed => 'Concluida',
+        TodoStatus.pending => AppStrings.statusPending,
+        TodoStatus.inProgress => AppStrings.statusInProgress,
+        TodoStatus.completed => AppStrings.statusCompleted,
       };
 
   Color get color => switch (this) {
