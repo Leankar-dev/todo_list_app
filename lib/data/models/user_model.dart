@@ -18,12 +18,12 @@ class UserModel {
   });
 
   factory UserModel.fromDrift(UsersTableData data) => UserModel(
-        id: data.id,
-        name: data.name,
-        email: data.email,
-        passwordHash: data.passwordHash,
-        createdAt: data.createdAt,
-      );
+    id: data.id,
+    name: data.name,
+    email: data.email,
+    passwordHash: data.passwordHash,
+    createdAt: data.createdAt,
+  );
 
   factory UserModel.fromEntity(UserEntity entity, {String passwordHash = ''}) =>
       UserModel(
@@ -35,17 +35,17 @@ class UserModel {
       );
 
   UserEntity toEntity() => UserEntity(
-        id: id,
-        name: name,
-        email: email,
-        createdAt: createdAt,
-      );
+    id: id,
+    name: name,
+    email: email,
+    createdAt: createdAt,
+  );
 
   UsersTableCompanion toCompanion() => UsersTableCompanion(
-        id: Value(id),
-        name: Value(name),
-        email: Value(email),
-        passwordHash: Value(passwordHash),
-        createdAt: Value(createdAt),
-      );
+    id: Value(id),
+    name: Value(name),
+    email: Value(email),
+    passwordHash: Value(passwordHash),
+    createdAt: Value(createdAt),
+  );
 }

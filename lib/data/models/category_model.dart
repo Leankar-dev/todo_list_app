@@ -17,30 +17,30 @@ class CategoryModel {
   });
 
   factory CategoryModel.fromDrift(CategoriesTableData data) => CategoryModel(
-        id: data.id,
-        name: data.name,
-        color: data.color,
-        icon: data.icon,
-      );
+    id: data.id,
+    name: data.name,
+    color: data.color,
+    icon: data.icon,
+  );
 
   factory CategoryModel.fromEntity(CategoryEntity entity) => CategoryModel(
-        id: entity.id,
-        name: entity.name,
-        color: entity.color.toARGB32(),
-        icon: entity.icon.codePoint.toString(),
-      );
+    id: entity.id,
+    name: entity.name,
+    color: entity.color.toARGB32(),
+    icon: entity.icon.codePoint.toString(),
+  );
 
   CategoryEntity toEntity() => CategoryEntity(
-        id: id,
-        name: name,
-        color: Color(color),
-        icon: IconData(int.parse(icon), fontFamily: 'MaterialIcons'),
-      );
+    id: id,
+    name: name,
+    color: Color(color),
+    icon: IconData(int.parse(icon), fontFamily: 'MaterialIcons'),
+  );
 
   CategoriesTableCompanion toCompanion() => CategoriesTableCompanion(
-        id: Value(id),
-        name: Value(name),
-        color: Value(color),
-        icon: Value(icon),
-      );
+    id: Value(id),
+    name: Value(name),
+    color: Value(color),
+    icon: Value(icon),
+  );
 }
